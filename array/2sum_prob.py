@@ -18,22 +18,23 @@ Explanation: There exist no such two numbers whose sum is equal to the target.
 """
 
 
-def sum_prob(len: int, nums: set[int], target: int):
-    """using hashing"""
+def two_sum(nums: list[int], target: int) -> str:
+    """Check if two numbers sum to target using hashing.
 
-    hash = {}
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    """
+    seen: dict[int, int] = {}
 
-    for i in range(len):
-        books = list(nums)
-        a = books[i]
-        more = target - a
-        if hash.get(more):
-            return "Yes"
-        hash[books[i]] = i
-        return "No"
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return "YES"
+        seen[num] = i
+
+    return "NO"
 
 
 if __name__ == "__main__":
-    is_yes = sum_prob(5, {2, 6, 5, 8, 11}, 14)
-
-    print(is_yes)
+    result = two_sum([2, 6, 5, 8, 11], 14)
+    print(result)
