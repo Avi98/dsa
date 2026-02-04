@@ -18,9 +18,22 @@ Explanation: There exist no such two numbers whose sum is equal to the target.
 """
 
 
-def sum_prob():
-    print("hi")
+def sum_prob(len: int, nums: set[int], target: int):
+    """using hashing"""
+
+    hash = {}
+
+    for i in range(len):
+        books = list(nums)
+        a = books[i]
+        more = target - a
+        if hash.get(more):
+            return "Yes"
+        hash[books[i]] = i
+        return "No"
 
 
 if __name__ == "__main__":
-    sum_prob()
+    is_yes = sum_prob(5, {2, 6, 5, 8, 11}, 14)
+
+    print(is_yes)
