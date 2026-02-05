@@ -24,23 +24,18 @@ Explanation:
 """
 
 
+from collections import Counter
+
+
 def find_by_occ(nums: list[int]) -> int:
-    """Find majority element using hashing.
+    """Find majority element using Counter.
 
     Time Complexity: O(n)
     Space Complexity: O(n)
     """
-    seen: dict[int, int] = {}
-
-    for num in nums:
-        seen[num] = seen.get(num, 0) + 1
-
+    counts = Counter(nums)
     threshold = len(nums) // 2
-    for key, count in seen.items():
-        if count > threshold:
-            return key
-
-    return -1  # Should never reach here per problem guarantee
+    return next(num for num, count in counts.items() if count > threshold)
 
 
 if __name__ == "__main__":

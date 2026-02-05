@@ -18,23 +18,22 @@ Explanation: There exist no such two numbers whose sum is equal to the target.
 """
 
 
-def two_sum(nums: list[int], target: int) -> str:
+def two_sum(nums: list[int], target: int) -> bool:
     """Check if two numbers sum to target using hashing.
 
     Time Complexity: O(n)
     Space Complexity: O(n)
     """
-    seen: dict[int, int] = {}
+    seen: set[int] = set()
 
-    for i, num in enumerate(nums):
-        complement = target - num
-        if complement in seen:
-            return "YES"
-        seen[num] = i
+    for num in nums:
+        if target - num in seen:
+            return True
+        seen.add(num)
 
-    return "NO"
+    return False
 
 
 if __name__ == "__main__":
     result = two_sum([2, 6, 5, 8, 11], 14)
-    print(result)
+    print("YES" if result else "NO")
