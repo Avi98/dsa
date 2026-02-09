@@ -27,28 +27,49 @@ constraints
 
 """
 
+from collections import deque
 
+
+# Approach 1
 class MovingAverage:
+    """
+    Docstring for MovingAverage
+    1. window using deque for O(1) insertion and removal
+    2. if dqueue increase k (window size), remove elemenent from head and sum, add new ele at tail
+    """
+
     def __init__(self, window_size: int) -> None:
-        self.window_size = window_size
-        self.incoming_items_avg = []
+        self.window = deque()
+        self.k = window_size
+        self.sum = 0
 
     def next(self, item: int):
-        items = self.incoming_items_avg
-        k = self.window_size
+        self.window.append(item)
+        self.sum += item
 
-        window_sum = sum(items[:k]) + item
+        if len(self.window) > self.k:
+            self.sum -= self.window.popleft()
+            self.sum += item
+            self.window.append(item)
+        return float(self.sum / len(self.window))
 
-        print("range", window_sum)
-        # for i in range(k, len(items))
+
+# Approach 2
+
+
+class MovingAverage2:
+    """
+    Docstring for MovingAverage2
+    1.
+    """
+
+    def __init__(self) -> None:
+        pass
 
 
 if __name__ == "__main__":
     movingAvg = MovingAverage(3)
-    movingAvg.next(1)
-    movingAvg.next(10)
-    movingAvg.next(3)
-    movingAvg.next(5)
-
-    list_val = movingAvg.incoming_items_avg
-    print(list_val)
+    print(movingAvg.next(1))
+    print(movingAvg.next(10))
+    print(movingAvg.next(3))
+    print(movingAvg.next(5))
