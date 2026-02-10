@@ -23,10 +23,16 @@ Output: [0,1]
 """
 
 
-def solution(nums: list[int], target: int) -> tuple[int, int]:
-    num = 1, 2
-    return num
+def solution(nums: list[int], target: int) -> tuple[int, int] | None:
+    num_map = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in num_map:
+            return (num_map[complement], i)
+        num_map[num] = i
+    return None
 
 
 if __name__ == "__main__":
     res = solution(nums=[2, 7, 11, 15], target=9)
+    print(res)
