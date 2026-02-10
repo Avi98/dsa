@@ -31,10 +31,7 @@ Input: customers = [1], grumpy = [0], minutes = 1
 
 Output: 1
 
-
-
 Constraints:
-
 n == customers.length == grumpy.length
 1 <= minutes <= n <= 2 * 104
 0 <= customers[i] <= 1000
@@ -43,10 +40,33 @@ grumpy[i] is either 0 or 1.
 """
 
 
-def grumpy_bookstore_owner():
-    pass
+def grumpy_bookstore_owner(customer: list[int], grumpy: list[int], min: int):
+    ans = 0
+
+    for i in range(len(grumpy)):
+        if grumpy[i] == 0:
+            ans += customer[i]
+
+    unsatisfied_customer = 0
+
+    for i in range(min):
+        if grumpy[i] == 1:
+            unsatisfied_customer += customer[i]
+    additional_customer = unsatisfied_customer
+
+    for i in range(min, len(grumpy)):
+        if grumpy[i] == 1:
+            unsatisfied_customer += customer[i]
+
+        if grumpy[i - min] == 1:
+            unsatisfied_customer -= customer[i - min]
+        additional_customer = max(unsatisfied_customer, additional_customer)
+
+    return additional_customer + ans
 
 
 if __name__ == "__main__":
-    res = grumpy_bookstore_owner()
+    res = grumpy_bookstore_owner(
+        customer=[1, 0, 1, 2, 1, 1, 7, 5], grumpy=[0, 1, 0, 1, 0, 1, 0, 1], min=3
+    )
     print(res)
