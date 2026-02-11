@@ -20,9 +20,30 @@ rotate 2 steps to the right: [3,99,-1,-100]
 """
 
 
+def reverse(nums, left, right):
+    while left < right:
+        nums[left], nums[right] = nums[right], nums[left]
+
+        left += 1
+        right -= 1
+
+
 def solution(nums: list[int], k: int):
     l, r = 0, len(nums) - 1
+    k = k % len(nums)
+
+    # 1. reverse the whole string
+    reverse(nums, left=l, right=r)
+
+    # 2. reverse the k els
+    reverse(nums, left=l, right=k)
+
+    # 3. reverse the rest of els
+    reverse(nums, left=k, right=len(nums) - 1)
+
+    return nums
 
 
 if __name__ == "__main__":
-    solution([1, 2, 3, 4, 5, 6, 7], 3)
+    nums = solution([1, 2, 3, 4, 5, 6, 7], 3)
+    print(nums)
