@@ -23,17 +23,27 @@ The number of consecutive 1's is 9.
 
 
 def max_consecutive_ones(nums: list[int], k: int):
-    count = sum(nums[:k])
-    max_count = max(count, sum(nums))
+    zeros = 0
+    max_len = 0
 
-    for i in range(k, len(nums)):
-        if nums[i] == 0:
-            count += 1
-        else:
-            count -= 1
-        max_count = max(count, max_count)
+    left = 0
 
-    return max_count
+    # Right pointer iterates through array
+    for r in range(len(nums)):
+        # If current element is 0, increment zero counter
+        if nums[r] == 0:
+            zeros += 1
+
+        # If number of zeros > k, shrink window from left
+        while zeros > k:
+            if nums[left] == 0:
+                zeros -= 1
+
+            # Move left pointer forward
+            left += 1
+
+        max_len = max(max_len, r - left + 1)
+    return max_len
 
 
 if __name__ == "__main__":
