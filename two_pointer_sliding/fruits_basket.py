@@ -46,8 +46,8 @@ def fruits_basket(num: list[int]) -> int:
     left = 0
     max_fruites = 0
 
-    for right in range(len(num)):
-        basket[num[right]] = basket.get(num[right], 0) + 1
+    for right, item in enumerate(num):
+        basket[item] = basket.get(item, 0) + 1
 
         while len(basket.items()) > 2:
             basket[num[left]] -= 1
