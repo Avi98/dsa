@@ -23,7 +23,6 @@ Explanation:
  The number 1 appears 4 times in the 6-sized array, making it the most frequent element.
 """
 
-
 from collections import Counter
 
 
