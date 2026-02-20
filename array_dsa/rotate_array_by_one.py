@@ -32,7 +32,7 @@ Rotating once to the left results in nums = [0, 3, 6, -1].
 
 
 def rotateArrayByOne(nums: list[int]):
-    pass
+    
 
 
 if __name__ == "__main__":
